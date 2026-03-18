@@ -11,13 +11,13 @@
 
 본 보고서는 **Ubuntu + NVIDIA Isaac Sim + Isaac Lab + VLA(vision-language-action) 학습도구**를 기반으로, **Hugging Face LeRobot**(데이터셋/로봇 제어/학습·평가 스택)과 연동되는 **실습 중심 교육 커리큘럼**을 설계한다. 핵심 설계 원칙은 “**하나의 표준 데이터/스키마로 시뮬레이션과 실로봇을 관통**”하는 것이다. 이를 위해 (1) 시뮬레이터에서 생성되는 센서·상태·행동·언어 지시를 **LeRobotDataset v3.0(Parquet+MP4, 메타데이터 기반 에피소드 재구성)**으로 기록·정규화하고, (2) 동일 포맷으로 실로봇에서 수집한 시연/실행 로그를 저장하여, (3) LeRobot의 VLA/IL/RL 정책 학습 및 벤치마크 평가 체인(예: LIBERO)을 통해 **심2리얼 전이 성능을 정량 검증**하는 루프를 구성한다.
 
-운영 관점에서 가장 큰 리스크는 **버전/런타임 불일치(드라이버·Python·ROS 2)**와 **실로봇 안전/데이터 거버넌스**다. Isaac Sim 5.1 기준으로 Ubuntu 22.04/24.04 및 특정 드라이버(예: Linux 580.65.06)가 요구되며, ROS 2 브리지 연동은 **Python 3.11 전제**로 설계해야 한다.
+운영 관점에서 가장 큰 리스크는 **버전/런타임 불일치(드라이버·ROS 2)**와 **실로봇 안전/데이터 거버넌스**다. Isaac Sim 5.1 기준으로 Ubuntu 22.04/24.04 및 특정 드라이버(예: Linux 580.65.06)가 요구된다.
 
 ---
 
 ## 기술 스택 전제조건 및 용어 정의
 
-**대상(학습자/교육 수준): 미지정**(요청 조건)
+**대상(학습자/교육 수준): 초급·중급·고급 각 수준에 맞는 커리큘럼이 별도 파일로 제공된다.**
 
 ### 필수 SW/HW 전제조건
 
@@ -45,10 +45,10 @@
 - Isaac Lab은 Isaac Sim 위에서 동작하며 RL/IL/모션플래닝 등 로봇학습 워크플로우를 통합하는 오픈소스 프레임워크로 소개된다.   
 - Isaac Lab–Isaac Sim 버전 의존성이 문서화되어 있으며(main/v2.3.x가 4.5/5.0/5.1과 호환 등), 교육 과정은 특정 조합으로 “고정된 재현 환경”을 제공해야 한다. 
 
-**ROS 2(시뮬-로봇 미들웨어 표준) 연동 전제**  
-- Isaac Sim ROS 2 브리지 문서는 “**Isaac Sim은 Python 3.11만 지원**”을 명시하며, ROS 2 Humble/Jazzy와의 조합 및 (필요 시) Python 3.11로 ROS 2 워크스페이스를 빌드하는 절차를 제시한다.   
-- 시간 동기화를 위해 `/clock` 토픽과 `use_sim_time`의 사용이 ROS 2 튜토리얼로 제공된다.   
-- TF 트리(`/tf`) 퍼블리시 및 오도메트리 구성도 Isaac Sim ROS 2 튜토리얼로 제공되어, 시뮬-실 로봇 공통의 좌표계/프레임 관리 실습이 가능하다. 
+**ROS 2(시뮬-로봇 미들웨어 표준) 연동 전제**
+- Isaac Sim ROS 2 브리지 문서는 ROS 2 Humble/Jazzy와의 조합 및 ROS 2 워크스페이스 빌드 절차를 제시한다. Isaac Sim이 요구하는 Python 버전과 ROS 2 배포판의 기본 Python 버전이 다를 수 있으므로, 연동 시 호환성을 확인해야 한다.
+- 시간 동기화를 위해 `/clock` 토픽과 `use_sim_time`의 사용이 ROS 2 튜토리얼로 제공된다.
+- TF 트리(`/tf`) 퍼블리시 및 오도메트리 구성도 Isaac Sim ROS 2 튜토리얼로 제공되어, 시뮬-실 로봇 공통의 좌표계/프레임 관리 실습이 가능하다.
 
 ### “VLA 학습도구” 정의(본 커리큘럼에서의 의미)
 
@@ -64,7 +64,7 @@
 
 ### 설계 원칙(교육 대상 미지정 조건 반영)
 
-1) **재현 가능한 “버전 고정형 실습”**: GPU 드라이버/Isaac Sim/Isaac Lab/ROS 2/Python의 버전 불일치가 가장 큰 실패 요인이므로, 모듈별로 “검증된 조합”을 명시한다. 특히 Isaac Sim 5.1의 OS(22.04/24.04), 드라이버(580.65.06), Python 3.11을 기준선으로 둔다.   
+1) **재현 가능한 “버전 고정형 실습”**: GPU 드라이버/Isaac Sim/Isaac Lab/ROS 2의 버전 불일치가 가장 큰 실패 요인이므로, 모듈별로 “검증된 조합”을 명시한다. 특히 Isaac Sim 5.1의 OS(22.04/24.04), 드라이버(580.65.06)를 기준선으로 둔다.   
 
 2) **데이터 중심(LeRobotDataset)으로 시뮬–실을 통합**: 시뮬/실 데이터 모두를 LeRobotDataset v3.0(Parquet+MP4, 메타 기반 에피소드)로 수렴시켜 모델 학습/평가 파이프라인을 단순화한다.   
 
@@ -81,7 +81,6 @@ ROS 2 연동은 Isaac Sim 내장 브리지(OmniGraph 노드 제공)를 사용하
 - 총 교육 기간: **미지정**  
 - 아래 시간은 “권장 예시(총 60–90시간)”이며, 운영 상황에 따라 단축/확장 가능(세부 시간의 합은 커스터마이징 가능).
 
-image_group{"layout":"carousel","aspect_ratio":"16:9","query":["NVIDIA Isaac Sim user interface screenshot","Isaac Lab robotics simulation environment","Hugging Face LeRobot SO-ARM101 robotic arm kit","Isaac Sim ROS2 bridge Omnigraph clock tf example"],"num_per_query":1}
 
 **모듈 A: 오리엔테이션·전체 아키텍처·성공 기준 정렬**  
 - 이론: (a) VLA 개념(시각·언어·행동), (b) 심2리얼 “리얼리티 갭” 문제, (c) 데이터셋 표준화의 필요성. RT-2가 제시한 VLA 정의(행동을 토큰화/공동학습)로 “언어 지시→행동”을 정식화한다.   
@@ -203,7 +202,7 @@ ROS 2 연동은 Isaac Sim 내장 브리지(OmniGraph 노드 제공)를 사용하
 **표준 프로토콜: ROS 2 (DDS 기반 메시징)**  
 - Isaac Sim은 ROS/ROS2 브리지 확장을 통해 pub/sub(토픽·서비스)을 제공하며, ROS2 브리지는 확장에서 활성화한다(ROS/ROS2 동시 활성화 불가).   
 - 카메라 데이터 퍼블리시, TF 트리 퍼블리시, `/clock` 퍼블리시 등은 튜토리얼/노드로 제공된다.   
-- 단, Isaac Sim 5.1에서 **Python 3.11 전제**가 강하게 걸리므로, 실로봇/외부 노드는 “DDS로만 연동”하는 형태(Isaac Sim 내부=Py3.11, 외부 노드=표준 ROS Python)도 가능하다는 가이드가 있다.   
+- 단, Isaac Sim 내부 Python 버전과 외부 ROS 2 노드의 Python 버전이 다를 수 있으므로, 실로봇/외부 노드는 “DDS 레벨에서만 연동”하는 형태(Isaac Sim 내부와 외부 노드가 각자의 Python 환경 사용)도 가능하다는 가이드가 있다.
 
 **대안 프로토콜: IsaacSimZMQ (ZeroMQ + Protobuf)**  
 - ROS를 사용하지 않는 워크플로우를 위해, Isaac Sim ↔ 외부 애플리케이션 간 양방향 통신 레퍼런스가 제공된다(카메라 RGB/Depth 스트리밍, bbox/제어 커맨드 교환 등).   
@@ -323,12 +322,12 @@ LeRobot는 시뮬 평가를 위한 벤치마크(LIBERO 등)를 프레임워크�
 
 ## 평가·피드백 체계와 예산·일정
 
-## 평가·피드백 방법(정량·정성 + 실습 루브릭)
+### 평가·피드백 방법(정량·정성 + 실습 루브릭)
 
 ### 정량 지표(권장)
 
 - **환경 구축 재현성 점수**: 버전표(OS/드라이버/Isaac Sim/Isaac Lab/LeRobot)와 실행 로그 제출(동일 결과 재현 여부)  
-- **데이터셋 품질 점수**: (a) 스키마 일관성(meta/info.json), (b) stats.json 정상 생성, (c) tasks.jsonl 태스크 커버리지, (d) frame drop/오디오(?) 등 품질 지표(영상 품질 포함)   
+- **데이터셋 품질 점수**: (a) 스키마 일관성(meta/info.json), (b) stats.json 정상 생성, (c) tasks.jsonl 태스크 커버리지, (d) frame drop 등 품질 지표(영상 품질 포함)   
 - **정책 성능**: 성공률/시간/안전 이벤트(“실로봇 성능”은 필수, 단 운영 환경이 없으면 “미지정”)  
 - **평가 자동화**: LeRobot의 평가 명령(예: LIBERO multi-eval)을 사용해 최소 n 에피소드 평가 및 로그 제출.   
 
