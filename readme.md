@@ -1,4 +1,4 @@
-# Ubuntu–Isaac Sim–Isaac Lab–VLA 학습도구 기반 LeRobot 연동 교육 커리큘럼 기획 보고서
+# Ubuntu–Isaac Sim–Isaac Lab–VLA 학습도구 기반 LeRobot 연동 교육 커리큘럼 기획 및 보고서
 
 📁 **[수준별 커리큘럼 파일 목록]**
 - 🟢 **초급자용 (6주 입문 과정)** : [basic_curriculum.md](./basic_curriculum.md)
