@@ -1,5 +1,12 @@
 # Ubuntu–Isaac Sim–Isaac Lab–VLA 학습도구 기반 LeRobot 연동 교육 커리큘럼 기획 보고서
 
+📁 **[수준별 커리큘럼 파일 목록]**
+- 🟢 **초급자용 (6주 입문 과정)** : [basic_curriculum.md](./basic_curriculum.md)
+- 🟡 **중급자용 (전공 대학생 대상 8주 과정)** : [intermediate_curriculum.md](./intermediate_curriculum.md)
+- 🔴 **고급자용 (연구원/시니어 대상 10주 심화 과정)** : [advanced_curriculum.md](./advanced_curriculum.md)
+
+---
+
 ## Executive Summary
 
 본 보고서는 **Ubuntu + NVIDIA Isaac Sim + Isaac Lab + VLA(vision-language-action) 학습도구**를 기반으로, **Hugging Face LeRobot**(데이터셋/로봇 제어/학습·평가 스택)과 연동되는 **실습 중심 교육 커리큘럼**을 설계한다. 핵심 설계 원칙은 “**하나의 표준 데이터/스키마로 시뮬레이션과 실로봇을 관통**”하는 것이다. 이를 위해 (1) 시뮬레이터에서 생성되는 센서·상태·행동·언어 지시를 **LeRobotDataset v3.0(Parquet+MP4, 메타데이터 기반 에피소드 재구성)**으로 기록·정규화하고, (2) 동일 포맷으로 실로봇에서 수집한 시연/실행 로그를 저장하여, (3) LeRobot의 VLA/IL/RL 정책 학습 및 벤치마크 평가 체인(예: LIBERO)을 통해 **심2리얼 전이 성능을 정량 검증**하는 루프를 구성한다. citeturn8view0turn2view1turn10view4turn11search3
