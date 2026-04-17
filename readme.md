@@ -4,6 +4,7 @@
 - 초급 트랙: [basic_curriculum.md](./basic_curriculum.md)
 - 중급 트랙: [intermediate_curriculum.md](./intermediate_curriculum.md)
 - 운영 검토 중인 온라인 트랙 초안: [online_curriculum.md](./online_curriculum.md)
+- 온라인 트랙 상세 작업 공간: [online_track/readme.md](./online_track/readme.md)
 - 후속 확장 메모: [advanced_curriculum.md](./advanced_curriculum.md)
 
 ---
@@ -17,7 +18,7 @@
 1. 초급자는 **SO101을 안전하게 다루고, LeRobot으로 데이터를 수집하고, 기본 모델을 실행**할 수 있어야 한다.
 2. 중급자는 동일한 SO101을 기반으로 **데이터 품질 관리, 모델 학습, 평가, 시뮬레이터 연계까지 확장**할 수 있어야 한다.
 
-실물 장비 접근이 제한된 학습자를 위한 **온라인 시뮬레이션형 트랙 초안**은 [online_curriculum.md](./online_curriculum.md)에서 별도로 관리한다. 이 온라인 문서는 초급/중급을 대체하지 않고, `LeRobot -> Isaac Sim` 흐름을 기준으로 한 보완형 경로로 둔다.
+실물 장비 접근이 제한된 학습자를 위한 **온라인 시뮬레이션형 트랙 초안**은 [online_curriculum.md](./online_curriculum.md)에서 별도로 관리한다. 세부 모듈 문서는 [online_track/readme.md](./online_track/readme.md) 아래에서 확장한다. 이 온라인 문서는 초급/중급을 대체하지 않고, `LeRobot -> Isaac Sim` 흐름을 기준으로 한 보완형 경로로 둔다.
 
 ---
 
@@ -94,6 +95,7 @@
 ## 온라인 트랙 초안 메모
 
 - [online_curriculum.md](./online_curriculum.md)는 **실물 SO101 없이도 LeRobot 파이프라인과 시뮬레이션 태스크 설계를 익히는 보완형 온라인 문서**다.
+- 상세 설계 작업은 [online_track/readme.md](./online_track/readme.md)에서 모듈별 파일로 분리해 진행한다.
 - 설명 순서는 `Omniverse -> Isaac Sim -> LeRobot`이 아니라, **`LeRobot/SO101 맥락 -> Isaac Sim 실습 -> Omniverse/USD 최소 개념`** 기준으로 잡는다.
 - 온라인 트랙은 현재 운영 검토 단계이며, 실제 실로봇 중심 과정의 대체안으로 두지 않는다.
 

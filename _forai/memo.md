@@ -28,6 +28,12 @@
 - Real robot first: 초급은 실로봇 중심으로 운영
 - Online sim support: 온라인 트랙은 `Isaac Sim`을 메인으로 쓰되 `Omniverse/USD`는 최소 개념만 포함
 
+## 문서 구조 메모
+
+- `online_curriculum.md`: 온라인 트랙의 상위 개요와 전체 차시 맵
+- `online_track/modules/`: 모듈별 상세 문서
+- `online_track/references/`: 운영/평가 공통 기준 문서
+
 ## 반복 금지
 
 - 고급 연구 주제를 초급/중급 본과정에 과도하게 혼합하지 않는다.

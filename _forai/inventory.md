@@ -11,7 +11,8 @@
 - readme.md: 전체 커리큘럼 기준과 운영 범위 설명
 - basic_curriculum.md: 초급 트랙 상세 커리큘럼
 - intermediate_curriculum.md: 중급 트랙 상세 커리큘럼
-- online_curriculum.md: 온라인 시뮬레이션 트랙 상세 초안
+- online_curriculum.md: 온라인 시뮬레이션 트랙 상위 개요 문서
+- online_track/: 온라인 트랙 상세 작업 디렉터리
 - advanced_curriculum.md: 고급 확장 주제 메모
 - assets/images/: 수업 안내용 이미지 리소스
 - _forai/: AI 작업 문맥 문서 세트
@@ -21,7 +22,8 @@
 - 메인 문서: readme.md
 - 초급 트랙 문서: basic_curriculum.md
 - 중급 트랙 문서: intermediate_curriculum.md
-- 온라인 트랙 문서: online_curriculum.md
+- 온라인 트랙 개요 문서: online_curriculum.md
+- 온라인 트랙 상세 문서 인덱스: online_track/readme.md
 - 확장 참조 문서: advanced_curriculum.md
 
 ## Build and validation commands
@@ -40,3 +42,4 @@
 - 초급/중급 모두 SO101 단일 플랫폼 기준 유지
 - 실로봇 중심 운영, 시뮬레이터는 중급 확장 모듈로 배치
 - 온라인 트랙은 `LeRobot -> Isaac Sim` 흐름의 보완형 시뮬레이션 초안으로 관리
+- 온라인 트랙 상세 작업은 `online_track/modules/`와 `online_track/references/`로 분리
